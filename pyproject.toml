@@ -1,13 +1,14 @@
 [tool.poetry]
 name = "tqdm-loggable"
 version = "0.1.0"
-description = "Logging friendly progress bars for TQDM"
+description = "Logging friendly progress messages for TQDM progress bars"
 authors = ["Mikko Ohtamaa <mikko@opensourcehacker.com>"]
 license = "MIT"
 readme = "README.md"
 packages = [{include = "tqdm_loggable"}]
 homepage = "https://tradingstrategy.ai"
 repository = "https://github.com/tradingstrategy-ai/python-logging-discord-handler"
+keywords = ["logging", "tqdm", "sentry", "logstash", "progress bar"]
 
 [tool.poetry.dependencies]
 python = "^3.8"

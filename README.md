@@ -1,4 +1,4 @@
-TQDM-loggable
+tqam_loggable
 =============
 
 Logging friendly TQDM progress bars.
@@ -25,7 +25,7 @@ that can be read in headless systems.
 - [The logging messages are structured](https://docs.python.org/3/howto/logging-cookbook.html#implementing-structured-logging), so they work with Sentry, LogStash, etc. rich logging services
   which provide advanced searching and tagging by variables
 
-Here is a sample `tqdm` log output in plain-text logs:
+Here is a sample `tqdm` log message output in plain text logs:
 
 ```
 tqdm_logging.py     :66   2022-09-20 23:30:48,667 Progress on:Sample progress 0.000000/60000.000000 rate:None it/s elapsed:0.0000 postfix:None
@@ -52,6 +52,14 @@ on your system.
 Usage
 -----
 
+The only things you need to do
+
+- Change import from `from tqdm.auto import tqdm` to `from tqdm_loggable.auto import tqdm`
+- Optionally call `tqdm_logging.set_level()`
+
+Here is [an example script](./tqdm_loggable/manual_tests.py): 
+
+
 ```python
 import datetime
 import logging
@@ -68,7 +76,8 @@ def main():
     fmt = f"%(filename)-20s:%(lineno)-4d %(asctime)s %(message)s"
     logging.basicConfig(level=logging.INFO, format=fmt, handlers=[logging.StreamHandler()])
 
-    # Set the log level to all tqdm-logging progress bars
+    # Set the log level to all tqdm-logging progress bars.
+    # Defaults to info - no need to set if you do not want to change the level
     tqdm_logging.set_level(logging.INFO)
 
     logger.info("This is an INFO test message using Python logging")
