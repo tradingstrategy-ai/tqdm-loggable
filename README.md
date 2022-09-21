@@ -117,14 +117,27 @@ to see what different interactive and non-interactive sessions give for you.
 poetry run manual-tests 
 ```
 
-or without a proper [TERM environment variable](https://unix.stackexchange.com/questions/528323/what-uses-the-term-variable):
+Because this is a normal shell session you will get a normal progress bar:
+
+```
+Sample progress:  20%|████████▏                                | 12.0k/60.0k [00:05<00:24, 1.98kit/s, Current time=2022-09-21 15:40:24.274670]
+```
+
+...then test without without a proper [TERM environment variable](https://unix.stackexchange.com/questions/528323/what-uses-the-term-variable):
 
 ```shell
 # Disable interactive terminal by fiddling with TERM environment variable
 TERM=dumb poetry run manual-tests 
 ```
 
-or with different Docker sessions:
+You get log messages:
+
+```
+tqdm_logging.py     :139  2022-09-21 17:41:20,720 Progress on:Sample progress -/60000 rate:- remaining:? elapsed:00:00 postfix:-
+tqdm_logging.py     :139  2022-09-21 17:41:30,803 Progress on:Sample progress 21.0kit/60.0kit rate:1,984.7it/s remaining:00:19 elapsed:00:10 postfix:Current time=2022-09-21 15:41:30.300714
+```
+
+...or with different Docker sessions:
 
 ```shell
 # This will display log mesages
