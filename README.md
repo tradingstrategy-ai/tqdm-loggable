@@ -1,16 +1,16 @@
 tqam-loggable
 =============
 
-Logging friendly TQDM progress bars.
+`tqam-loggable` is petite Python package providing logging friendly TQDM progress bars.
 
-If your Python code has `tqdm` progress bars and you use them in a non-interactive session like 
+If your Python application has [tqdm](https://tqdm.github.io/) progress bars and you use them in a non-interactive session like... 
 
 - Background worker
 - Docker container
 - Edge computing
 - Logstash or other external logs
-- Long running machine learning tasks
-- ...or [Stdout](https://en.wikipedia.org/wiki/Standard_streams) is otherwise not available or redirected
+- Long -unning machine learning tasks
+- ...or [stdout](https://en.wikipedia.org/wiki/Standard_streams) stream is otherwise not available or redirected
 
 ...you cannot have nice ANSI coloured progress bar. What happens is that if you are observing
 your application using monitoring tools you usually do not see anything happening while your
@@ -56,7 +56,8 @@ Usage
 The only things you need to do
 
 - Change import from `from tqdm.auto import tqdm` to `from tqdm_loggable.auto import tqdm`
-- Optionally call `tqdm_logging.set_level()`
+- Optionally call `tqdm_logging.set_level()` at the init of your application
+- Optionally call `tqdm_logging.set_log_rate()` at the init of your application
 
 Here is [an example script](./tqdm_loggable/manual_tests.py): 
 
@@ -116,21 +117,24 @@ to see what different interactive and non-interactive sessions give for you.
 poetry run manual-tests 
 ```
 
-or
+or without a proper [TERM environment variable](https://unix.stackexchange.com/questions/528323/what-uses-the-term-variable):
 
 ```shell
 # Disable interactive terminal by fiddling with TERM environment variable
 TERM=dumb poetry run manual-tests 
 ```
 
-or
+or with different Docker sessions:
 
 ```shell
+# This will display log mesages
 docker build -t manual-tests . && docker run manual-tests
+
+# This will allocate a terminal and display normal tqdm progress bar
 docker build -t manual-tests . && docker run -ti manual-tests
 ```
 
-or
+or with redirected stdout:
 
 ```shell
 poetry run manual-tests > output.txt
@@ -151,6 +155,8 @@ if you run the manual test interactively or not.
 
 See also
 --------
+
+See other relevant logging packages:
 
 - [python-discord-logging-handler](https://github.com/tradingstrategy-ai/python-logging-discord-handler)
 - [python-logstash](https://github.com/tradingstrategy-ai/python-logstash)
