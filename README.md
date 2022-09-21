@@ -1,4 +1,4 @@
-tqam-loggable
+tqdm-loggable
 =============
 
 `tqdm-loggable` is petite Python package providing logging friendly TQDM progress bars.
