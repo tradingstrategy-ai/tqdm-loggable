@@ -1,3 +1,5 @@
+"""The bag of utility functions."""
+
 import os
 import sys
 

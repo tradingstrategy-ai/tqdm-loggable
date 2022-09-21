@@ -1,4 +1,4 @@
-tqam_loggable
+tqam-loggable
 =============
 
 Logging friendly TQDM progress bars.
@@ -12,15 +12,20 @@ If your Python code has `tqdm` progress bars and you use them in a non-interacti
 - Long running machine learning tasks
 - ...or [Stdout](https://en.wikipedia.org/wiki/Standard_streams) is otherwise not available or redirected
 
-...you cannot have nice ANSI coloured progress bar. 
+...you cannot have nice ANSI coloured progress bar. What happens is that if you are observing
+your application using monitoring tools you usually do not see anything happening while your
+application is doing some task and tracking progress using `tqdm`. This is 
+fixed by `tqdm-logging` by sending a regular reports about your progress to logging backend like files and log monitoring
+tools.
 
 In these situations `tqdm-loggable` will automatically turn your `tqdm` progress bars to loggable progress messages
 that can be read in headless systems.
 
 
-`tqdm-loggable` will
+`tqdm-loggable`... 
 
-- Use Python [logging](https://docs.python.org/3/library/logging.html) subsystem to report status instead of terminal
+- Is a drop-in replacement for the normal `tqdm` - nothing changes unless non-interactive session is detected
+- Uses Python [logging](https://docs.python.org/3/library/logging.html) subsystem to report status instead of terminal
 - Print a log line for every X seconds
 - [The logging messages are structured](https://docs.python.org/3/howto/logging-cookbook.html#implementing-structured-logging), so they work with Sentry, LogStash, etc. rich logging services
   which provide advanced searching and tagging by variables
@@ -28,16 +33,12 @@ that can be read in headless systems.
 Here is a sample `tqdm` log message output in plain text logs:
 
 ```
-tqdm_logging.py     :66   2022-09-20 23:30:48,667 Progress on:Sample progress 0.000000/60000.000000 rate:None it/s elapsed:0.0000 postfix:None
-tqdm_logging.py     :66   2022-09-20 23:30:48,667 Progress on:Sample progress 1000.000000/60000.000000 rate:None it/s elapsed:0.0002 postfix:Current time=2022-09-20 21:30:48.667763
-tqdm_logging.py     :66   2022-09-20 23:30:49,175 Progress on:Sample progress 2000.000000/60000.000000 rate:3944.6880828079934 it/s elapsed:0.5071 postfix:Current time=2022-09-20 21:30:48.667763
-tqdm_logging.py     :66   2022-09-20 23:30:49,176 Progress on:Sample progress 2000.000000/60000.000000 rate:3944.6880828079934 it/s elapsed:0.5086 postfix:Current time=2022-09-20 21:30:49.175720
-tqdm_logging.py     :66   2022-09-20 23:30:49,676 Progress on:Sample progress 3000.000000/60000.000000 rate:2800.3272375400925 it/s elapsed:1.0092 postfix:Current time=2022-09-20 21:30:49.175720
-tqdm_logging.py     :66   2022-09-20 23:30:49,677 Progress on:Sample progress 3000.000000/60000.000000 rate:2800.3272375400925 it/s elapsed:1.0095 postfix:Current time=2022-09-20 21:30:49.677158
-tqdm_logging.py     :66   2022-09-20 23:30:50,182 Progress on:Sample progress 4000.000000/60000.000000 rate:2423.8261963519526 it/s elapsed:1.5151 postfix:Current time=2022-09-20 21:30:49.677158
-tqdm_logging.py     :66   2022-09-20 23:30:50,183 Progress on:Sample progress 4000.000000/60000.000000 rate:2423.8261963519526 it/s elapsed:1.5160 postfix:Current time=2022-09-20 21:30:50.183488
-tqdm_logging.py     :66   2022-09-20 23:30:50,687 Progress on:Sample progress 5000.000000/60000.000000 rate:2249.4302448431927 it/s elapsed:2.0196 postfix:Current time=2022-09-20 21:30:50.183488
-tqdm_logging.py     :66   2022-09-20 23:30:50,688 Progress on:Sample progress 5000.000000/60000.000000 rate:2249.4302448431927 it/s elapsed:2.0205 postfix:Current time=2022-09-20 21:30:50.688095
+tqdm_logging.py     :139  2022-09-21 12:13:44,138 Progress on:Progress bar without total -/- rate:- remaining:? elapsed:00:00 postfix:-
+tqdm_logging.py     :139  2022-09-21 12:13:46,225 Progress on:Progress bar without total 10000/- rate:- remaining:? elapsed:00:02 postfix:-
+
+tqdm_logging.py     :139  2022-09-21 12:13:46,225 Progress on:Sample progress -/60000 rate:- remaining:? elapsed:00:00 postfix:-
+tqdm_logging.py     :139  2022-09-21 12:13:56,307 Progress on:Sample progress 21.0kit/60.0kit rate:1,982.9it/s remaining:00:19 elapsed:00:10 postfix:Current time=2022-09-21 10:13:55.801787
+tqdm_logging.py     :139  2022-09-21 12:14:06,392 Progress on:Sample progress 41.0kit/60.0kit rate:1,984.1it/s remaining:00:09 elapsed:00:20 postfix:Current time=2022-09-21 10:14:05.890220
 ```
 
 Note that `tqdm-loggable` is not to be confused with [tqdm.contrib.logging](https://tqdm.github.io/docs/contrib.logging/) 
@@ -79,6 +80,10 @@ def main():
     # Set the log level to all tqdm-logging progress bars.
     # Defaults to info - no need to set if you do not want to change the level
     tqdm_logging.set_level(logging.INFO)
+    
+    # Set the rate how often we update logs
+    # Defaults to 10 seconds - optional
+    tqdm_logging.set_log_rate(datetime.timedelta(seconds=10))    
 
     logger.info("This is an INFO test message using Python logging")
 
@@ -97,6 +102,8 @@ def main():
 If the application is running without a proper terminal, non-interactive progress messages will be used.
 Otherwise progress bar is delegated `tqdm.auto` module to maintain the compatibility
 with any `tqdm` system without any changes to code.
+
+The Python logger instance used to log the messages is named `tqqm_loggable.tqm_logging`.
 
 Development
 -----------
