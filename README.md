@@ -1,7 +1,7 @@
 tqam-loggable
 =============
 
-`tqam-loggable` is petite Python package providing logging friendly TQDM progress bars.
+`tqdm-loggable` is petite Python package providing logging friendly TQDM progress bars.
 
 If your Python application has [tqdm](https://tqdm.github.io/) progress bars and you use them in a non-interactive session like... 
 
@@ -12,10 +12,10 @@ If your Python application has [tqdm](https://tqdm.github.io/) progress bars and
 - Long-running machine learning tasks
 - ...or [stdout](https://en.wikipedia.org/wiki/Standard_streams) stream is otherwise not available or redirected
 
-...you cannot have nice ANSI coloured progress bar. What happens is that if you are observing
-your application using monitoring tools you usually do not see anything happening while your
-application is doing some task and tracking progress using `tqdm`. This is 
-fixed by `tqdm-logging` by sending a regular reports about your progress to logging backend like files and log monitoring
+...you cannot have interactive progress bar. What happens is that if you are observing
+your application using monitoring tools, you usually do not see anything happening while your
+application is having`tqdm` progress ongoing. If the progress bar'ed operation takes few minutes your appliaction
+may appear frozen. This is  fixed by `tqdm-logging` by sending a regular reports about your progress to logging backend like files and log monitoring
 tools.
 
 In these situations `tqdm-loggable` will automatically turn your `tqdm` progress bars to loggable progress messages
@@ -55,12 +55,19 @@ Usage
 
 The only things you need to do
 
+- Make sure your [Python logging system is properly configured](https://docs.python.org/3/howto/logging.html)
 - Change import from `from tqdm.auto import tqdm` to `from tqdm_loggable.auto import tqdm`
 - Optionally call `tqdm_logging.set_level()` at the init of your application
 - Optionally call `tqdm_logging.set_log_rate()` at the init of your application
 
-Here is [an example script](./tqdm_loggable/manual_tests.py): 
+Search and replace instructions for your Python codebase:
 
+```
+from tqdm import tqdm -> from tqdm_loggable.auto import tqdm 
+from tqdm.auto import tqdm -> from tqdm_loggable.auto import tqdm
+```
+
+Here is [an example script](./tqdm_loggable/manual_tests.py):
 
 ```python
 import datetime
@@ -171,6 +178,7 @@ See also
 
 See other relevant logging packages:
 
+- [tqdm-loggable on PyPi](https://pypi.org/project/tqdm-loggable/)
 - [python-discord-logging-handler](https://github.com/tradingstrategy-ai/python-logging-discord-handler)
 - [python-logstash](https://github.com/tradingstrategy-ai/python-logstash)
 
