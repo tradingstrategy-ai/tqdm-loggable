@@ -20,6 +20,9 @@ NON_INTERACTIVE_TERM_VALUES = ["dumb", "", None]
 def is_interactive_session() -> bool:
     """Guess if we are an interactive session and can render real progress bars."""
 
+    if is_notebook():
+        return True
+
     if not sys.stdout.isatty():
         return False
 
@@ -30,4 +33,18 @@ def is_interactive_session() -> bool:
     if term in NON_INTERACTIVE_TERM_VALUES:
         return False
 
+    return True
+
+
+def is_notebook() -> bool:
+    """Guess if we are an in Jupyter notebook environment."""
+
+    try:
+        from IPython import get_ipython
+        if "IPKernelApp" not in get_ipython().config:
+            return False
+    except ImportError:
+        return False
+    except AttributeError:
+        return False
     return True
