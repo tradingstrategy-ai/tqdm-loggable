@@ -147,10 +147,10 @@ tqdm_logging.py     :139  2022-09-21 17:41:30,803 Progress on:Sample progress 21
 ...or with different Docker sessions:
 
 ```shell
-# This will display log mesages
+# This will display process as log messages
 docker build -t manual-tests . && docker run manual-tests
 
-# This will allocate a terminal and display normal tqdm progress bar
+# This will allocate a terminal and display progress as a normal tqdm progress bar
 docker build -t manual-tests . && docker run -ti manual-tests
 ```
 
