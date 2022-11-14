@@ -16,6 +16,8 @@ tqdm = "^4.64.1"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.1.3"
+jupyterlab = "^3.5.0"
+ipywidgets = ">=7.0,<8.0"
 
 [build-system]
 requires = ["poetry-core"]
@@ -23,5 +25,5 @@ build-backend = "poetry.core.masonry.api"
 
 # Entry point to our terminal detector
 [tool.poetry.scripts]
-manual-tests = 'tqdm_loggable.manual_tests:main'
+manual-tests = "tqdm_loggable.manual_tests:main"
 
