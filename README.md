@@ -29,6 +29,7 @@ that can be read in headless systems.
 - Print a log line for every X seconds
 - [The logging messages are structured](https://docs.python.org/3/howto/logging-cookbook.html#implementing-structured-logging), so they work with Sentry, LogStash, etc. rich logging services
   which provide advanced searching and tagging by variables
+- Special support for Github Actions and other continous integration environments
 
 Here is a sample `tqdm` log message output in plain text logs:
 
