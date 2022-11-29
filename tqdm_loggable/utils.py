@@ -23,6 +23,9 @@ def is_interactive_session() -> bool:
     if is_notebook():
         return True
 
+    if is_continous_integration():
+        return False
+
     if not sys.stdout.isatty():
         return False
 
@@ -48,3 +51,15 @@ def is_notebook() -> bool:
     except AttributeError:
         return False
     return True
+
+
+def is_continous_integration() -> bool:
+    """Disable progress bars in continous integration systems.
+
+    Github Actions (and other CI) may allocate an interactive
+    terminal for a job. However, in case of Github,
+    they do not seem to be able to refresh the progress bar correctly,
+    floooding the CI log with progress bar lines.
+    """
+    # https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
+    return "CI" in os.environ
