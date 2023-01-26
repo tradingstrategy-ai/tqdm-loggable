@@ -131,7 +131,10 @@ class tqdm_logging(tqdm_auto):
             "elapsed": elapsed,
             "n": n,
             "total": total,
-            "postfix": raw_postfix,
+            # Ideally we'd like to submit raw postfix so structure is retained, but
+            # it may contain non-JSON'able values that choke some  loggers
+            # e.g. python-logstash
+            "postfix": postfix_str,
             "eta": eta_dt.isoformat(),
             "remaining": remaining,
         }

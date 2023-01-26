@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "tqdm-loggable"
-version = "0.1.2"
+version = "0.1.3"
 description = "TQDM progress bar friendliness for non-interactive terminals and logging output"
 authors = ["Mikko Ohtamaa <mikko@opensourcehacker.com>"]
 license = "MIT"
