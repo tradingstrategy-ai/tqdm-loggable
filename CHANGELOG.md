@@ -1,3 +1,7 @@
+# 0.1.4
+
+- Invert rate display to s/it if rate is less than 1
+
 # 0.1.3
 
 - Fix compatibility with python-logstash
