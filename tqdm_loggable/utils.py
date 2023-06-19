@@ -63,3 +63,9 @@ def is_continous_integration() -> bool:
     """
     # https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
     return "CI" in os.environ
+
+
+def is_stdout_only_session() -> bool:
+    """Guess if we are in a session where only stdout is available.
+    """
+    return os.environ.get("AGENT_MANAGER_HOST", None) == 'datalore'
