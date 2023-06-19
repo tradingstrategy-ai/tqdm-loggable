@@ -1,6 +1,6 @@
 from .utils import is_interactive_session, is_stdout_only_session
 
-if is_interactive_session():
+if is_interactive_session() and not is_stdout_only_session():
     from tqdm.auto import tqdm
     INTERACTIVE_TQDM = True
 elif is_stdout_only_session():
