@@ -1,7 +1,7 @@
 tqdm-loggable
 =============
 
-`tqdm-loggable` is petite Python package providing logging friendly TQDM progress bars.
+`tqdm-loggable` is a petite Python package providing logging friendly TQDM progress bars.
 
 If your Python application has [tqdm](https://tqdm.github.io/) progress bars and you use them in a non-interactive session like... 
 
@@ -20,7 +20,6 @@ tools.
 
 In these situations `tqdm-loggable` will automatically turn your `tqdm` progress bars to loggable progress messages
 that can be read in headless systems.
-
 
 `tqdm-loggable`... 
 
@@ -111,6 +110,9 @@ def main():
 If the application is running without a proper terminal, non-interactive progress messages will be used.
 Otherwise progress bar is delegated `tqdm.auto` module to maintain the compatibility
 with any `tqdm` system without any changes to code.
+
+`tqdm_loggable` has also progress bar workarounds for [Jupyter Notebook environments](https://jupyter.org/)
+like [Datalore](https://www.jetbrains.com/datalore/) which [are not 100% compatible](https://jupyter.org/) with the original Jupyter Notebook.
 
 The Python logger instance used to log the messages is named `tqqm_loggable.tqm_logging`.
 

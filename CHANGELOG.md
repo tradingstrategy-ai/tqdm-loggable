@@ -1,3 +1,7 @@
+# 0.1.4
+
+- Fix [TQDM auto compatibility with Datalore](https://github.com/tradingstrategy-ai/tqdm-loggable/pull/4)
+
 # 0.1.3
 
 - Fix compatibility with python-logstash
