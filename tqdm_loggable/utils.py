@@ -63,3 +63,16 @@ def is_continous_integration() -> bool:
     """
     # https://docs.github.com/en/actions/learn-github-actions/environment-variables#default-environment-variables
     return "CI" in os.environ
+
+
+def is_stdout_only_session() -> bool:
+    """Guess if we are in a session where only stdout is available.
+
+    Datalore is an example of such environment. Datalore provides code autocompletion
+    and documentation pop ups, as well as other features that make it desirable to use.
+    See https://www.jetbrains.com/datalore/
+
+    A code report has been privately logged to Datalore support for enquiring about the
+    feature disparity between Datalore and Jupyter Notebooks.
+    """
+    return os.environ.get("AGENT_MANAGER_HOST", None) == 'datalore'
