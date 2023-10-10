@@ -154,3 +154,11 @@ class tqdm_logging(tqdm_auto):
 
         self.last_log_message_at = datetime.now()
 
+    def close(self):
+        if self.disable:
+            return
+
+        # Prevent multiple closures
+        self.disable = True
+
+        self.display()
