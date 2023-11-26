@@ -113,7 +113,10 @@ class tqdm_logging(tqdm_auto):
         elapsed_str = tqdm_auto.format_interval(elapsed)
 
         if rate:
-            rate_formatted = f"{rate:,.1f}{unit}/s"
+            if rate > 1:
+                rate_formatted = f"{rate:,.1f}{unit}/s"
+            else:
+                rate_formatted = f"{1/rate:,.1f}s/{unit}"
         else:
             rate_formatted = "-"
 
