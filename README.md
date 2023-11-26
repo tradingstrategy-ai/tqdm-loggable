@@ -120,6 +120,9 @@ The Python logger instance used to log the messages is named `tqqm_loggable.tqm_
 Development
 -----------
 
+**Note**: This repository is so low activity that we do not actively watch for new issues.
+If you have a feature or a PR please [poke us in Discord first](https://tradingstrategy.ai/community).
+
 You can use [tqdm_loggable/manual_tests.py](./tqdm_loggable/manual_tests.py) to run the various checks 
 to see what different interactive and non-interactive sessions give for you.
 
