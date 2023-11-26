@@ -1,18 +1,28 @@
 [tool.poetry]
 name = "tqdm-loggable"
-version = "0.1.4"
-description = "TQDM progress bar friendliness for non-interactive terminals and logging output"
+version = "0.2"
+description = "TQDM progress bar helpers for logging and other headless application"
 authors = ["Mikko Ohtamaa <mikko@opensourcehacker.com>"]
 license = "MIT"
 readme = "README.md"
 packages = [{include = "tqdm_loggable"}]
-homepage = "https://tradingstrategy.ai"
+homepage = "https://github.com/tradingstrategy-ai/tqdm-loggable"
 repository = "https://github.com/tradingstrategy-ai/tqdm-loggable"
 keywords = ["logging", "tqdm", "sentry", "logstash", "progress bar", "datadog", "new relic"]
 
+# See PyPi for supported links https://github.com/pypi/warehouse/blob/main/warehouse/templates/packaging/detail.html
+# https://stackoverflow.com/a/74394591/315168
+# https://pypi.org/project/links-demo/
+[tool.poetry.urls]
+Changelog = "https://github.com/tradingstrategy-ai/tqdm-loggable/blob/master/CHANGELOG.md"
+Twitter = "https://twitter.com/tradingprotocol"
+Youtube = "https://www.youtube.com/@tradingstrategyprotocol"
+Discord = "https://discord.gg/5M88m9nM8H"
+Sponsor = "https://tradingstrategy.ai"
+
 [tool.poetry.dependencies]
-python = "^3.8"
-tqdm = "^4.64.1"
+python = ">3.8"
+tqdm = ">4.64"
 
 [tool.poetry.group.dev.dependencies]
 pytest = "^7.1.3"

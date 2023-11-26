@@ -1,6 +1,8 @@
-# WIP
+# 0.2
 
-- Invert rate display to s/it if rate is less than 1
+- Add: Invert rate display to s/it if rate is less than 1 by https://github.com/elephantum
+- Fix: Do not add extra new line when closing progress bar by https://github.com/danielnelson
+- Fix: Unpin dependencies
 
 # 0.1.4
 
