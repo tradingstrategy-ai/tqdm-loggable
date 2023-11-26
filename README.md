@@ -24,6 +24,7 @@ that can be read in headless systems.
 `tqdm-loggable`... 
 
 - Is a drop-in replacement for the normal `tqdm` - nothing changes unless non-interactive session is detected
+- Is compatible with `tqdm.auto` and HTML-based progress bars in Jupyter Notebooks
 - Uses Python [logging](https://docs.python.org/3/library/logging.html) subsystem to report status instead of terminal
 - Print a log line for every X seconds
 - [The logging messages are structured](https://docs.python.org/3/howto/logging-cookbook.html#implementing-structured-logging), so they work with Sentry, LogStash, etc. rich logging services
