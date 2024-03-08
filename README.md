@@ -10,6 +10,7 @@ If your Python application has [tqdm](https://tqdm.github.io/) progress bars and
 - Edge computing
 - [Logstash](https://www.elastic.co/logstash/), [Sentry](https://docs.sentry.io/platforms/python/), [Datadog](https://docs.datadoghq.com/logs/log_collection/python/?tab=jsonlogformatter) or other external log tools
 - Long-running machine learning tasks
+- Datalore notebook environments from JetBrains 
 - ...or [stdout](https://en.wikipedia.org/wiki/Standard_streams) stream is otherwise not available or redirected
 
 ...you cannot have interactive progress bar. What happens is that if you are observing
