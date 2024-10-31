@@ -1,7 +1,7 @@
 """Progress-to-logs tqdm implementation."""
 
 import logging
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, UTC
 
 from tqdm.auto import tqdm as tqdm_auto
 
@@ -106,7 +106,7 @@ class tqdm_logging(tqdm_auto):
         remaining_str = tqdm_auto.format_interval(remaining) if rate else '?'
         try:
             eta_dt = (datetime.now() + timedelta(seconds=remaining)
-                      if rate and total else datetime.utcfromtimestamp(0))
+                      if rate and total else datetime.fromtimestamp(0, UTC(0))
         except OverflowError:
             eta_dt = datetime.max
 
