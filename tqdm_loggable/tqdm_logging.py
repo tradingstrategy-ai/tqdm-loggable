@@ -1,12 +1,21 @@
 """Progress-to-logs tqdm implementation."""
 
 import logging
-from datetime import datetime, timedelta
+import sys
+from datetime import datetime, timedelta, timezone
 
 from tqdm.auto import tqdm as tqdm_auto
 
 
 logger = logging.getLogger(__name__)
+
+
+def _utc_epoch() -> datetime:
+    """Return the Unix epoch as a naive UTC datetime, compatible across Python versions."""
+    if sys.version_info >= (3, 12):
+        return datetime.fromtimestamp(0, tz=timezone.utc).replace(tzinfo=None)
+    else:
+        return datetime.utcfromtimestamp(0)
 
 
 class tqdm_logging(tqdm_auto):
@@ -106,7 +115,7 @@ class tqdm_logging(tqdm_auto):
         remaining_str = tqdm_auto.format_interval(remaining) if rate else '?'
         try:
             eta_dt = (datetime.now() + timedelta(seconds=remaining)
-                      if rate and total else datetime.utcfromtimestamp(0))
+                      if rate and total else _utc_epoch())
         except OverflowError:
             eta_dt = datetime.max
 
