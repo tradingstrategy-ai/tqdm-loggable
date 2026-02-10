@@ -44,6 +44,6 @@ def main():
             progress_bar.update(1000)
 
             # Test postfix output
-            progress_bar.set_postfix({"Current time": datetime.datetime.utcnow()})
+            progress_bar.set_postfix({"Current time": datetime.datetime.now(datetime.timezone.utc)})
 
             time.sleep(0.5)

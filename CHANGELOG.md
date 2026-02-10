@@ -1,3 +1,11 @@
+# 0.3
+
+- Add: Python 3.14 compatibility (2026-02-10)
+- Fix: Replace deprecated `datetime.utcfromtimestamp()` and `datetime.utcnow()` calls (2026-02-10)
+- Add: GitHub Actions CI workflow for Python 3.10-3.14 (2026-02-10)
+- Add: pytest test suite (2026-02-10)
+- Change: Bump minimum Python version to 3.10 (2026-02-10)
+
 # 0.2
 
 - Add: Invert rate display to s/it if rate is less than 1 by https://github.com/elephantum
