@@ -17,6 +17,33 @@ import sys
 NON_INTERACTIVE_TERM_VALUES = ["dumb", "", None]
 
 
+def get_forced_progress_mode() -> str | None:
+    """Get forced progress rendering mode from environment.
+
+    Supported values:
+
+    - ``auto``: Use the normal automatic detection
+    - ``stdout``: Force plain terminal/stdout tqdm
+    - ``logging``: Force logging-based tqdm
+
+    The value is case-insensitive.
+    Invalid values are ignored.
+    """
+
+    # This override exists for mixed environments where auto-detection is
+    # technically correct about "being in a notebook" but wrong about the
+    # desired output channel.
+    value = os.environ.get("TQDM_LOGGABLE_FORCE", None)
+    if value is None:
+        return None
+
+    value = value.strip().lower()
+    if value in {"auto", "stdout", "logging"}:
+        return value
+
+    return None
+
+
 def is_interactive_session() -> bool:
     """Guess if we are an interactive session and can render real progress bars."""
 

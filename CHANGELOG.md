@@ -1,3 +1,9 @@
+# 0.4
+
+- Add: `TQDM_LOGGABLE_FORCE=stdout|logging|auto` environment override for deterministic progress rendering in notebook kernels and batch runners like `jupyter execute` (2026-03-15)
+- Add: tests covering forced stdout and logging selection in `tqdm_loggable.auto` (2026-03-15)
+- Docs: document the override for notebook kernels that should render progress in the calling TTY instead of widget/HTML output (2026-03-15)
+
 # 0.3
 
 - Add: Python 3.14 compatibility (2026-02-10)

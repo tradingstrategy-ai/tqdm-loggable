@@ -113,6 +113,26 @@ If the application is running without a proper terminal, non-interactive progres
 Otherwise progress bar is delegated `tqdm.auto` module to maintain the compatibility
 with any `tqdm` system without any changes to code.
 
+If you need to override the auto-detection, set `TQDM_LOGGABLE_FORCE` before importing `tqdm_loggable.auto`:
+
+- `TQDM_LOGGABLE_FORCE=stdout` forces plain terminal / stdout tqdm
+- `TQDM_LOGGABLE_FORCE=logging` forces logging-based progress output
+- `TQDM_LOGGABLE_FORCE=auto` restores normal detection
+
+This is especially useful for notebook kernels launched by tools like `jupyter execute`, where the runtime is technically inside an IPython kernel but you still want a terminal-rendered progress bar in the calling TTY.
+
+Example:
+
+```python
+import os
+
+os.environ["TQDM_LOGGABLE_FORCE"] = "stdout"
+
+from tqdm_loggable.auto import tqdm
+```
+
+Use `stdout` when you want a real terminal progress bar in the parent shell, and `logging` when the process is running headlessly and progress should be emitted as log lines instead.
+
 `tqdm_loggable` has also progress bar workarounds for [Jupyter Notebook environments](https://jupyter.org/)
 like [Datalore](https://www.jetbrains.com/datalore/) which [are not 100% compatible](https://jupyter.org/) with the original Jupyter Notebook.
 
