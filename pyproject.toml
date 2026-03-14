@@ -1,24 +1,24 @@
 [tool.poetry]
-name = "tqdm-loggable"
-version = "0.3"
-description = "TQDM progress bar helpers for logging and other headless application"
 authors = ["Mikko Ohtamaa <mikko@opensourcehacker.com>"]
-license = "MIT"
-readme = "README.md"
-packages = [{include = "tqdm_loggable"}]
+description = "TQDM progress bar helpers for logging and other headless application"
 homepage = "https://github.com/tradingstrategy-ai/tqdm-loggable"
-repository = "https://github.com/tradingstrategy-ai/tqdm-loggable"
 keywords = ["logging", "tqdm", "sentry", "logstash", "progress bar", "datadog", "new relic"]
+license = "MIT"
+name = "tqdm-loggable"
+packages = [{include = "tqdm_loggable"}]
+readme = "README.md"
+repository = "https://github.com/tradingstrategy-ai/tqdm-loggable"
+version = "0.4"
 
 # See PyPi for supported links https://github.com/pypi/warehouse/blob/main/warehouse/templates/packaging/detail.html
 # https://stackoverflow.com/a/74394591/315168
 # https://pypi.org/project/links-demo/
 [tool.poetry.urls]
 Changelog = "https://github.com/tradingstrategy-ai/tqdm-loggable/blob/master/CHANGELOG.md"
-Twitter = "https://twitter.com/tradingprotocol"
-Youtube = "https://www.youtube.com/@tradingstrategyprotocol"
 Discord = "https://discord.gg/5M88m9nM8H"
 Sponsor = "https://tradingstrategy.ai"
+Twitter = "https://twitter.com/tradingprotocol"
+Youtube = "https://www.youtube.com/@tradingstrategyprotocol"
 
 [tool.poetry.dependencies]
 python = ">=3.10"
@@ -28,10 +28,9 @@ tqdm = ">4.64"
 pytest = "^8.0"
 
 [build-system]
-requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+requires = ["poetry-core"]
 
 # Entry point to our terminal detector
 [tool.poetry.scripts]
 manual-tests = "tqdm_loggable.manual_tests:main"
-
