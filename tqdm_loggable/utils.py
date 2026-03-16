@@ -16,6 +16,16 @@ import sys
 #:
 NON_INTERACTIVE_TERM_VALUES = ["dumb", "", None]
 
+#: Stable Datalore environment markers seen in current notebook runtimes.
+#:
+#: `AGENT_MANAGER_HOST=datalore` was used by older environments, but newer
+#: instances expose Datalore-specific variables instead.
+DATALORE_ENV_VARS = [
+    "DATALORE_AGENT_MODE",
+    "DATALORE_HOME",
+    "DATALORE_USER",
+]
+
 
 def get_forced_progress_mode() -> str | None:
     """Get forced progress rendering mode from environment.
@@ -102,4 +112,7 @@ def is_stdout_only_session() -> bool:
     A code report has been privately logged to Datalore support for enquiring about the
     feature disparity between Datalore and Jupyter Notebooks.
     """
-    return os.environ.get("AGENT_MANAGER_HOST", None) == 'datalore'
+    if os.environ.get("AGENT_MANAGER_HOST", None) == "datalore":
+        return True
+
+    return any(os.environ.get(name) for name in DATALORE_ENV_VARS)
