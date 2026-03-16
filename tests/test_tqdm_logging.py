@@ -7,6 +7,7 @@ import warnings
 from datetime import timedelta
 
 from tqdm_loggable.tqdm_logging import tqdm_logging, _utc_epoch
+from tqdm_loggable.utils import DATALORE_ENV_VARS, is_stdout_only_session
 
 
 def test_no_deprecation_warnings(caplog):
@@ -80,3 +81,29 @@ def test_invalid_force_mode_is_ignored(monkeypatch):
     auto_module = _reload_auto_module()
 
     assert auto_module.tqdm is not None
+
+
+def test_detects_legacy_datalore_env(monkeypatch):
+    """Ensure older Datalore environments still use stdout-only mode."""
+    monkeypatch.setenv("AGENT_MANAGER_HOST", "datalore")
+
+    assert is_stdout_only_session() is True
+
+
+def test_detects_current_datalore_env(monkeypatch):
+    """Ensure current Datalore environment markers trigger stdout-only mode."""
+    for name in DATALORE_ENV_VARS:
+        monkeypatch.delenv(name, raising=False)
+
+    monkeypatch.setenv("DATALORE_AGENT_MODE", "CONTAINER")
+
+    assert is_stdout_only_session() is True
+
+
+def test_auto_selects_stdout_for_datalore(monkeypatch):
+    """Ensure Datalore notebook runtimes avoid the interactive notebook frontend."""
+    monkeypatch.delenv("TQDM_LOGGABLE_FORCE", raising=False)
+    monkeypatch.setenv("DATALORE_HOME", "/opt/datalore")
+    auto_module = _reload_auto_module()
+
+    assert auto_module.INTERACTIVE_TQDM is False
