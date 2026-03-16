@@ -1,6 +1,8 @@
+# 0.4.1
+- Fix: Restore Datalore stdout-only detection for current runtimes that expose `DATALORE_*` environment variables instead of `AGENT_MANAGER_HOST=datalore` (2026-03-16)
+
 # 0.4
 
-- Fix: Restore Datalore stdout-only detection for current runtimes that expose `DATALORE_*` environment variables instead of `AGENT_MANAGER_HOST=datalore` (2026-03-16)
 - Add: `TQDM_LOGGABLE_FORCE=stdout|logging|auto` environment override for deterministic progress rendering in notebook kernels and batch runners like `jupyter execute` (2026-03-15)
 - Add: tests covering forced stdout and logging selection in `tqdm_loggable.auto` (2026-03-15)
 - Docs: document the override for notebook kernels that should render progress in the calling TTY instead of widget/HTML output (2026-03-15)
